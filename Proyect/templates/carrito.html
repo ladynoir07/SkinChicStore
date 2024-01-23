@@ -1,0 +1,35 @@
+<!-- carrito.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Encabezado -->
+</head>
+<body>
+    <h2>Carrito de Compras</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in carrito %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>{{ producto.subtotal }}</td>
+                    <td>
+                        <a href="{{ url_for('eliminar_producto', producto_id=producto.id) }}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('realizar_compra') }}">Realizar Compra</a>
+</body>
+</html>

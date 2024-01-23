@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    * {
+    box-sizing: border-box;
+  }
+
+ body {
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: url('../static/SkinChicStore.png') no-repeat center center fixed; /* ruta imagen de maqui */
+    background-size: 99%;
+  }
+
+  /* Style the side navigation */
+  .sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#FF5277, #f5e1ce);
+    overflow-x: hidden;
+  }
+
+  /* Side navigation links */
+  .sidenav a {
+    color: #270a07;
+    padding-left: 40px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color on hover */
+  .sidenav a:hover {
+    border: 2px solid rgba(255, 180, 180, 0.5);
+    border-radius: 15px;
+    background-color: rgba(255, 105, 150, 0.1);
+    color: #f5e1ce;
+  }
+
+  .letrasnav {
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+  }
+
+  /* Style the content */
+  .content {
+    margin-left: 200px;
+    padding-left: 20px;
+    margin-top: 100px;
+  }
+
+  .logo img {
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    padding-bottom: 5px;
+  }
+
+  /* Hide the submenu by default */
+  .submenu {
+    display: none;
+  }
+
+  /* Style the submenu links */
+  .submenu a {
+    padding-left: 60px;
+    background-color: #f5e1ce; /* Cambia el color de fondo submenu */
+    color: #0E0A0D; /* Cambia el color del texto del sub */
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+  }
+  /* Style the "rutina" button */
+  .rutina-btn {
+    background-color: #f5e1ce; /* Color boton rutina */
+    color: #270a07;
+    padding: 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 25px;
+
+  }
+
+  /* Change color on hover */
+  .rutina-btn:hover {
+    background-color: #2b9fc8; /* Color amarillo más claro al pasar el ratón */
+    color: #2b9fc8;
+  }
+    .topnav {
+    background-color: #FDE8E3; /* Color de fondo de la barra superior */
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+  /* Style the top navigation links */
+  .topnav a {
+    float: right;
+    display: block;
+    color: black; /* Color del texto de la barra superior */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: #0E0A0D;
+    color: #f5e1ce;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.navigation a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.navigation .btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.navigation .btnLogin-popup:hover {
+    background: #fff;
+    color: navy;
+}
+
+.wrapper {
+    position: relative;
+    height: 400px;
+    width: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height 2.s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+.wrapper.active {
+    height: 520px;
+}
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: black;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2 {
+    font-size: 2em;
+    color:black;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #000;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    color: black;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: black;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: black;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: .9em;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-required p a:hover {
+    text-decoration: underline;
+}
+  </style>
+  <title> Skin Chic: {% block title %}
+    {% endblock %}</title>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="/register">Registro</a>
+    <a href="/login">login</a>
+</div>
+  </style>
+
+</head>
+<body>
+
+<div class="sidenav">
+
+  <div class="logo">
+    <img src= "../static/logo.png" alt="Logo">
+  </div>
+
+  <div class="letrasnav">
+   <a href="/maquillaje" onclick="toggleSubmenu('submenuMaqui')">Maquillaje</a>
+    <div class="submenu" id="submenuMaqui">
+        <a href="#">Rostro</a>
+        <a href="#">Labios</a>
+        <a href="#">Brochas</a>
+        <a href="#">Ojos</a>
+        <a href="#">Fijadores</a>
+    </div>
+
+    <a href="/facial" onclick="toggleSubmenu('submenuFacial')">Facial</a>
+    <div class="submenu" id="submenuFacial">
+      <a href="#">Limpieza y exfoliacion</a>
+      <a href="#">Hidratacion</a>
+      <a href="#">Tratamientos y sueros</a>
+      <a href="#">Cuidado de labios</a>
+
+    </div>
+    <a href="/corporal"onclick="toggleSubmenu('submenuCorporal')">Corporal</a>
+    <div class="submenu" id="submenuCorporal">
+      <a href="#">Formulas corporales</a>
+      <a href="#">Reafirmantes</a>
+      <a href="#">Hidratacion y humectacion</a>
+      <a href="#">Reductores</a>
+</div>
+    <a href="psolar" >Proteccion solar</a>
+    <a href="#">BLOG</a>
+  </div>
+   <!-- Rutina button -->
+  <a href="#" class="rutina-btn">RUTINA</a>
+</div>
+
+<div class="content">
+
+  {% block main %}{% endblock %}
+</div>
+</div>
+
+
+
+<script>
+  function toggleSubmenu(submenuId) {
+    var submenu = document.getElementById(submenuId);
+    submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+  }
+</script>
+
+</body>
+</html>

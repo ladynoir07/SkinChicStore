@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        /* Estilos para la clase "contenido" */
+        .contenido {
+            /* Agrega estilos según tus preferencias */
+            max-width: 1100px;
+            width:100;
+            margin:40px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Estilos para la clase "mostrador" */
+        .mostrador {
+            /* Estilos para el contenedor de los productos */
+            width: 100%;
+            transition: .5% ease;
+            /* Agrega más estilos según lo necesites */
+        }
+        .mostrador .fila{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .mostrador .fila .item{
+            max-width: 210px;
+            padding: 15px;
+
+            heigth: 250px;
+            text-aling: center;
+            margin: 0 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: .3s;
+        }
+        .mostrador .fila .item:hover{
+            background: transparent;
+                border: 2px solid rgba(255, 255, 255, .5);
+                border-radius: 20px;
+                backdrop-filter: blur(20px);
+                box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+                overflow: hidden;
+
+        }
+
+        .mostrador .fila .item img{
+            width: 100%;
+            margin: 30px 0;
+        }
+        .mostrador .fila .item .descripcion{
+            color:#707070;
+            font-weight: bold;
+        }
+        .mostrador .fila .item .precio{
+            color: #FF5277;
+            font-weight: bold;
+            fonts-size: 20px;
+        }
+
+
+        /* Estilos para la clase "contenedor-foto" dentro de ".item" */
+        .item .contenedor-foto {
+            /* Estilos para el contenedor de cada producto */
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            
+            /* Agrega más estilos según lo necesites */
+        }
+        .body{
+
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tu código HTML aquí -->
+    {% extends 'layout.html' %}
+    {% block title %}
+        mostrador
+    {% endblock %}
+
+    {% block main %}
+
+        <!-----------------------PRODUCTOS--------------------->
+
+        <section class="contenido">
+            <div class="mostrador" id="mostrador">
+                <div class="fila">
+                    {% for product in products %}
+                    <div class="item">
+                        <div class="contenedor-foto">
+                            <img src="{{product.imagen}}" alt="">
+                            <p class="descripcion"> {{product.nombre}} </p>
+                            <span class="precio"> $ {{product.precio}} </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    {% endblock %}
+</body>
+</html>
+
